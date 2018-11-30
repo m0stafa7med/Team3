@@ -10,18 +10,18 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         int siz = sc.nextInt();
         arr = new String[siz];
-        
+
         System.out.println("Enter array elements:");
         	for(int i=0;i<siz;i++)
                 arr[i] = sc.next();
-        
-    	
+
+
         printMenu();
         int choice = sc.nextInt();
         sc.close();
         switch (choice){
             case 1: // Reverse Array
-
+         reverse (arr);
                 break;
 
             case 2: // Check palindrome
@@ -41,7 +41,7 @@ public class Main {
                 break;
 
             case 6: // Most repeated value
-
+                most_Repeated_Value(arr);
                 break;
 
             case 7: // Get median
@@ -90,6 +90,9 @@ public class Main {
 
             case 18: //execute all
             	CheckPalindrome(arr);
+            	 most_Repeated_Value(arr);
+            	  reverse (arr);
+
                 break;
         }
 
@@ -119,22 +122,57 @@ public class Main {
     }
 
 
-  
-    public static void CheckPalindrome(String arr[])  
-    {  
+
+    public static void CheckPalindrome(String arr[])
+    {
 
         String[] reverse = new String[arr.length];
-        
+
         for(int i = 0; i < arr.length; i++)
         {
 	        reverse[i] = arr[arr.length - i - 1];
         }
 	    Boolean isPal = Arrays.toString(arr).equals(Arrays.toString(reverse));
-	    	
-	    if (isPal)  
-	        System.out.println("Entered string is a palindrome.");  
-	    else  
-	        System.out.println("Entered string isn't a palindrome.");   
-    }  
+
+	    if (isPal)
+	        System.out.println("Entered string is a palindrome.");
+	    else
+	        System.out.println("Entered string isn't a palindrome.");
+    }
+
+    static void most_Repeated_Value(int arr[])
+    {
+        // Name : Islam Ibrahim Amin
+        // ID   : 20160320
+
+        Arrays.sort(arr);
+        int n = arr.length;
+        int max_count = 1, result = arr[0];
+        int current_count = 1;
+
+        for (int i = 1; i < n; i++)
+        {
+            if (arr[i] == arr[i - 1])
+                current_count++;
+            else {
+                if (current_count > max_count) {
+                    max_count = current_count;
+                    result = arr[i - 1];
+                }
+                current_count = 1;
+            }
+        }
+        System.out.printf("most repeated Value is : %d\n", result);
+        System.out.printf("Repeated times is : %d\n",max_count);
+    }
+
+    static void reverse (int []arr){
+        ArrayList arr2 = new ArrayList<>();
+        for(int i = 0 ; i < arr.length ; i++ )
+            arr2.add(arr[i]);
+        for(int i = 1 ; i <= arr.length ; i++ )
+            arr[i-1] = (int) arr2.get(arr.length-i);
+    }
+
 
 }
